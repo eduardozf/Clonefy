@@ -6,3 +6,6 @@ Remake of spotify for study purposes
   - [x] ReactJS
   - [x] React Native
   - [x] Electrum
+  TypeORM
+  Docker
+  Insominia
