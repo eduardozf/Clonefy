@@ -7,6 +7,7 @@
 /zClonefy.ignore
 # testing
 */coverage
+.gitignore
 
 # production
 */build
