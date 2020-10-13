@@ -4,6 +4,7 @@ import Playlists from '../database/models/Playlists';
 
 export default module.exports = {
   async list(req: Request, res: Response) {
+    console.log('⏩', req.method, req.url);
     try {
       const repo = getRepository(Playlists);
       return res.json(await repo.find());
@@ -14,6 +15,7 @@ export default module.exports = {
   },
 
   async findById(req: Request, res: Response) {
+    console.log('⏩', req.method, req.url);
     try {
       const repo = getRepository(Playlists);
       const playlist = await repo.find({

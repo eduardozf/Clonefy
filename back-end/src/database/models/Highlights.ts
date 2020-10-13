@@ -8,8 +8,8 @@ export default class Highlights {
   @Column()
   title: string;
 
-  @Column()
-  playlists: string;
+  @Column({ type: "simple-array", default: '' })
+  playlists: string[];
 
   @Column('time with time zone')
   date: Date;
