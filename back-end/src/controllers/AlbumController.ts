@@ -1,19 +1,27 @@
-import { v4 as uuid } from 'uuid';
 import { Request, Response } from 'express';
-
-const Albums = [
-  {
-    id: '966e3261-1bc3-4a3a-a5cb-2d071ad10542',
-    name: 'A volta',
-    description: 'Album do tue mc',
-    artist: '',
-    musics: ['4ea50d01-c4bc-458e-8af2-6c201e4cb131'],
-    genre: 'RAP',
-  },
-];
+import { getRepository } from 'typeorm';
+import Albums from '../database/models/Albums'
 
 export default module.exports = {
-  list(req: Request, res: Response) {
-    return res.json(Albums);
+  async list(req: Request, res: Response) {
+    try {
+      const repo = getRepository(Albums);
+      return res.json(await repo.find());
+    }
+    catch (err) {
+      console.log('⛔ err.message >> ', err.message)
+    }
   },
+
+  async add(req: Request, res: Response) {
+    try {
+      const repo = getRepository(Albums);
+      const response = await repo.save(req.body)
+      return res.json(response);
+    }
+    catch (err) {
+      console.log('⛔ err.message >> ', err.message)
+    }
+  },
+
 };

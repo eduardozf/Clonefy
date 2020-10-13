@@ -1,27 +1,26 @@
-import { v4 as uuid } from 'uuid';
 import { Request, Response } from 'express';
-import { IPlaylist } from './PlaylistController';
-
-export interface IHighlights {
-  id: string;
-  title: string;
-  playlists: IPlaylist[];
-}
-
-const Highlights: IHighlights[] = [];
+import { getRepository } from 'typeorm';
+import Highlights from '../database/models/Highlights';
 
 export default module.exports = {
-  list(req: Request, res: Response) {
-    return res.json(Highlights);
+  async list(req: Request, res: Response) {
+    try {
+      const repo = getRepository(Highlights);
+      return res.json(await repo.find());
+    }
+    catch (err) {
+      console.log('⛔ err.message >> ', err.message)
+    }
   },
-  add(req: Request, res: Response) {
-    const { title, playlistsID } = req.body;
-    const Highlight = {
-      id: uuid(),
-      title,
-      playlists: [],
-    };
-    Highlights.push(Highlight);
-    return res.json(Highlight);
+
+  async add(req: Request, res: Response) {
+    try {
+      const repo = getRepository(Highlights);
+      const response = await repo.save(req.body)
+      return res.json(response);
+    }
+    catch (err) {
+      console.log('⛔ err.message >> ', err.message)
+    }
   },
 };
