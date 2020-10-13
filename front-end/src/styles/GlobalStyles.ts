@@ -11,6 +11,10 @@ export default createGlobalStyle`
     height: 100%;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   *, button, input {
     border: 0;
     outline: 0;

@@ -17,23 +17,27 @@ export const Category = styled.div`
       color: var(--white);
       font-size: 24px;
       letter-spacing: 0;
+      &:hover{
+        text-decoration: underline;
+      }
     }
   }
   a{
     color: var(--gray);
     font-size: 12px;
+    &:hover{
+      text-decoration: underline;
+    }
   } 
 `
 
 export const PlaylistContainer = styled.div`
   display: grid;
-  grid-auto-rows: 0;
-  grid-template-rows: 1fr;
   grid-gap: 24px;
   grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
-
-  overflow-x: hidden;
   overflow-y: hidden;
+  grid-auto-rows: 0;
+  grid-template-rows: 1fr;
 `
 
 export const PlaylistsCard = styled.div`

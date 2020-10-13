@@ -6,6 +6,10 @@ export const Container = styled.div`
   padding: 0 32px;
   padding-top: 16px;
 
+  display: grid;
+  grid-gap: 32px;
+  padding-top: 16px;
+
   overflow-y: scroll;
   background-attachment: scroll!important;
   scroll-behavior: auto!important;

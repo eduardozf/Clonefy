@@ -16,8 +16,8 @@ const Spotlights: React.FC<Props> = ({ highlightRef }) => {
         <a href="/">VER TUDO</a>
       </Category>
       <PlaylistContainer>
-        {highlightRef.playlists.map((playlistRef) => (
-          <PlaylistCard key={playlistRef.id} playlistRef={playlistRef} />
+        {highlightRef.playlists.map((playlist) => (
+          <PlaylistCard key={playlist} playlistID={playlist} />
         ))}
       </PlaylistContainer>
     </Container>

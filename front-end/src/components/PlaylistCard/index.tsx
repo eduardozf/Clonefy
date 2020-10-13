@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import api from '../../services/Api';
 
 import { Background, Container, InfoContainer, PlayButtonContainer, PlayButton } from './styles';
 
@@ -12,43 +13,39 @@ function handlePlay(e: any) {
   return;
 }
 
-export interface Iplaylist {
-  id: string;
-  name: string;
-  description: string;
-  avatar: string;
-  musics: Object[];
-  genre: string;
-  private: boolean;
-}
-
 interface Props {
-  playlistRef: Iplaylist;
+  playlistID: string;
 }
 
-const PlaylistCard: React.FC<Props> = ({ playlistRef }) => {
+const PlaylistCard: React.FC<Props> = ({ playlistID }) => {
+  const [playlist, setPlaylist] = useState<any>([]);
+  useEffect(() => {
+    api.get(`playlists/${playlistID}`).then(res => {
+      setPlaylist(res.data[0]);
+    })
+  }, [])
+
   return (
-    <Background onClick={handleShowPlaylist} key={playlistRef.id}>
+    <Background onClick={handleShowPlaylist} key={playlistID}>
       <Container>
         <img
           aria-hidden="false"
-          alt=""
           draggable="false"
           loading="lazy"
-          src={playlistRef.avatar}>
-        </img>
+          src={playlist.avatar}
+          alt="" />
         <InfoContainer>
-          <h3>{playlistRef.name}</h3>
-          <span>{playlistRef.description}</span>
+          <h3>{playlist.name}</h3>
+          <span>{playlist.description}</span>
         </InfoContainer>
-        <PlayButtonContainer className="playBTN">
-          <PlayButton onClick={handlePlay}>
-            <svg height="16" role="img" width="16" viewBox="0 0 24 24" aria-hidden="true">
-              <polygon points="21.57 12 5.98 3 5.98 21 21.57 12" fill="currentColor"></polygon>
-            </svg>
-          </PlayButton>
-        </PlayButtonContainer>
       </Container>
+      <PlayButtonContainer className="playBTN">
+        <PlayButton onClick={handlePlay}>
+          <svg height="16" role="img" width="16" viewBox="0 0 24 24" aria-hidden="true">
+            <polygon points="21.57 12 5.98 3 5.98 21 21.57 12" fill="currentColor"></polygon>
+          </svg>
+        </PlayButton>
+      </PlayButtonContainer>
     </Background>
   );
 }

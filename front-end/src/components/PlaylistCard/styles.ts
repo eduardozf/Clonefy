@@ -1,16 +1,22 @@
 import styled from 'styled-components';
 
 export const Background = styled.div`
+  flex: 1;
   position: relative;
+  padding: 16px;
 
-  padding: 15px;
-  background-color: var(--quinary);
-  border-radius: 4px;
   width: 100%;
+  height: fit-content;
+  background: var(--quinary);
+  border-radius: 4px;
+
+  isolation: isolate;
+  transition: background .2s ease;
+
   cursor: pointer;
 
   &:hover{
-    background-color: var(--quartenary);
+    background: var(--quartenary);
   }
   &:hover .playBTN{
     opacity: 1;
@@ -19,10 +25,12 @@ export const Background = styled.div`
 
 export const Container = styled.div` 
   display: flex;
-  flex-direction: column;
   flex: 1;
+  flex-direction: column;
 
   height: 100%;
+
+  user-select: none;
   
   img{
     width: 100%;
@@ -38,21 +46,36 @@ export const InfoContainer = styled.div`
 
   h3{
     color: var(--white);
-    margin-bottom: 5px;
+    user-select: none;
+    max-width: 100%;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    z-index: 1;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: normal;
+    text-transform: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
   span{
     display: -webkit-box;
     color: var(--gray);
+
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: pre-wrap;
 
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     margin-top: 4px;
     white-space: normal;
 
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: pre-wrap;
   }
 `
 
