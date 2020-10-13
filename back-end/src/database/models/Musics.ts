@@ -1,8 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Users {
-
+export default class Musics {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -10,16 +9,16 @@ export class Users {
   name: string;
 
   @Column()
-  email: string;
-
-  @Column()
-  password: string;
-
-  @Column()
   avatar: string;
 
   @Column()
-  playlists: string;
+  artist: string;
+
+  @Column()
+  genre: string;
+
+  @Column()
+  views: number;
 
   @Column('time with time zone')
   date: Date;
