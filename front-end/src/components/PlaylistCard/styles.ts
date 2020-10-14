@@ -36,6 +36,7 @@ export const Container = styled.div`
     width: 100%;
     position: relative;
     margin-bottom: 16px;
+    border-radius: 2px;
 
     background-color: var(--secondary);
   }

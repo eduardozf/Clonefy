@@ -4,18 +4,17 @@ import Playlists from '../database/models/Playlists';
 
 export default module.exports = {
   async list(req: Request, res: Response) {
-    console.log('⏩', req.method, req.url);
     try {
       const repo = getRepository(Playlists);
       return res.json(await repo.find());
     }
     catch (err) {
-      console.log('⛔ err.message >> ', err.message)
+      console.log('⛔ err.message >> ', err.message);
+      return res.status(400).json();
     }
   },
 
   async findById(req: Request, res: Response) {
-    console.log('⏩', req.method, req.url);
     try {
       const repo = getRepository(Playlists);
       const playlist = await repo.find({
@@ -26,7 +25,22 @@ export default module.exports = {
       return res.json(playlist);
     }
     catch (err) {
-      console.log('⛔ err.message >> ', err.message)
+      console.log('⛔ err.message >> ', err.message);
+      return res.status(400).json();
+    }
+  },
+
+  async findByBody(req: Request, res: Response) {
+    const repo = getRepository(Playlists);
+    try {
+      const playlists = await repo.createQueryBuilder("playlists")
+        .where("id IN (:...ids)", { ids: req.query.playlists })
+        .getMany();
+      return res.json(playlists);
+    }
+    catch (err) {
+      console.log('⛔ err.message >> ', err.message);
+      return res.status(400).json();
     }
   },
 
@@ -37,7 +51,8 @@ export default module.exports = {
       return res.json(response);
     }
     catch (err) {
-      console.log('⛔ err.message >> ', err.message)
+      console.log('⛔ err.message >> ', err.message);
+      return res.status(400).json();
     }
   },
 };

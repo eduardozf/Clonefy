@@ -21,7 +21,8 @@ routes.put('/musics/:id/edit', MusicController.edit);
 routes.delete('/musics/:id/delete', MusicController.delete);
 // Playlists
 routes.get('/playlists', PlaylistController.list);
-routes.get('/playlists/:id', PlaylistController.findById);
+routes.get('/playlists/list', PlaylistController.findByBody);
+routes.get('/playlists/:id/list', PlaylistController.findById);
 routes.post('/playlists', PlaylistController.add);
 // Albums
 routes.get('/albums', AlbumController.list);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import api from '../../services/Api';
+
 
 import { Background, Container, InfoContainer, PlayButtonContainer, PlayButton } from './styles';
 
@@ -13,20 +13,23 @@ function handlePlay(e: any) {
   return;
 }
 
+interface IPlaylist {
+  id: string;
+  name: string;
+  description: string;
+  avatar: string;
+  musics: string[];
+  genre: string;
+  private: boolean;
+}
 interface Props {
-  playlistID: string;
+  playlist: IPlaylist;
 }
 
-const PlaylistCard: React.FC<Props> = ({ playlistID }) => {
-  const [playlist, setPlaylist] = useState<any>([]);
-  useEffect(() => {
-    api.get(`playlists/${playlistID}`).then(res => {
-      setPlaylist(res.data[0]);
-    })
-  }, [])
+const PlaylistCard: React.FC<Props> = ({ playlist }) => {
 
   return (
-    <Background onClick={handleShowPlaylist} key={playlistID}>
+    <Background onClick={handleShowPlaylist}>
       <Container>
         <img
           aria-hidden="false"

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Container } from './styles';
+import { Container, HighlightsContainer, HighlightsGrid } from './styles';
 import Highlight from '../Highlights';
 
 import api from '../../services/Api';
@@ -21,10 +21,14 @@ const Content: React.FC = () => {
 
   return (
     <Container>
-      {highlights.map((highlightItem) => (
-        < Highlight key={highlightItem.id} highlightRef={highlightItem} />
-      ))
-      }
+      <HighlightsContainer>
+        <HighlightsGrid>
+          {highlights.map((highlightItem) => (
+            < Highlight key={highlightItem.id} highlightRef={highlightItem} />
+          ))
+          }
+        </HighlightsGrid>
+      </HighlightsContainer>
     </Container>
   );
 }
