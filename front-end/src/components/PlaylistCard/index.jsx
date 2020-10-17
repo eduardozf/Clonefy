@@ -1,36 +1,15 @@
 import React, { useContext } from 'react';
 import { baseURL } from '../../services/Api';
+import { playerContext } from '../../context/Player';
 
 import { PlayArrow } from '@material-ui/icons';
 import { Background, Container, InfoContainer, PlayButtonContainer, PlayButton } from './styles';
-import { playerContext, controllerContext } from '../MusicPlayer/playerContext';
-interface IPlaylist {
-  id: string;
-  name: string;
-  description: string;
-  avatar: string;
-  musics: string[];
-  genre: string;
-  private: boolean;
-}
-interface Props {
-  playlist: IPlaylist;
-}
 
-function handleShowPlaylist() {
-  alert("Opening Playlist!");
-}
-
-function handlePlay(e: any) {
-  e.stopPropagation();
-}
-
-
-const PlaylistCard: React.FC<Props> = ({ playlist }) => {
-  const { isPlaying, setIsPlaying } = useContext<any>(playerContext);
+function PlaylistCard({ playlist }) {
+  const { PlayPause } = useContext(playerContext);
 
   return (
-    <Background onClick={handleShowPlaylist}>
+    <Background onClick={() => { }}>
       <Container>
         <img
           aria-hidden="false"
@@ -44,7 +23,7 @@ const PlaylistCard: React.FC<Props> = ({ playlist }) => {
         </InfoContainer>
       </Container>
       <PlayButtonContainer className="playBTN">
-        <PlayButton onClick={(e) => { handlePlay(e); setIsPlaying(!isPlaying) }}>
+        <PlayButton onClick={(e) => { e.stopPropagation(); PlayPause() }}>
           <PlayArrow />
         </PlayButton>
       </PlayButtonContainer>

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Container, Header, NavegationButtons, ButtonsContainer } from './styles';
 
-const TopBar: React.FC = () => {
+function TopBar() {
   return (
     <Container>
       <Header>

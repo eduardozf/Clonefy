@@ -4,18 +4,9 @@ import api from '../../services/Api';
 import { Container, Category, PlaylistContainer } from './styles';
 import PlaylistCard from '../PlaylistCard';
 
-export interface Ihighlights {
-  id: string;
-  title: string;
-  playlists: string[];
-}
-interface Props {
-  highlightRef: Ihighlights;
-}
+function Highlights({ highlightRef }) {
 
-const Highlights: React.FC<Props> = ({ highlightRef }) => {
-
-  const [playlists, setPlaylists] = useState<any>([]);
+  const [playlists, setPlaylists] = useState([]);
 
   useEffect(() => {
     api.get('playlists/list', {
@@ -34,7 +25,7 @@ const Highlights: React.FC<Props> = ({ highlightRef }) => {
         <a href="/">VER TUDO</a>
       </Category>
       <PlaylistContainer>
-        {playlists.map((playlist: any) => (
+        {playlists.map((playlist) => (
           <PlaylistCard key={playlist.id} playlist={playlist} />
         ))}
       </PlaylistContainer>

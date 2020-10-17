@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
+import { playerContext } from '../../context/Player';
 
-import PlayerController from './playerController';
-import { playerContext, controllerContext } from './playerContext';
 import { Slider } from '@material-ui/core';
 import {
   Shuffle,
@@ -30,11 +29,15 @@ import {
   VolumeContainer
 } from './styles';
 
-export const MusicPlayer: React.FC = () => {
+function MusicPlayer() {
+  const {
+    music,
+    isPlaying,
+    PlayPause
+  } = useContext(playerContext);
 
   return (
     <Container>
-      <PlayerController />
       <MusicInfo>
         <div>
           <img src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png" alt="" width="56px" height="56px" />
@@ -58,7 +61,7 @@ export const MusicPlayer: React.FC = () => {
           <button>
             <SkipPrevious style={{ fontSize: 20 }} />
           </button>
-          <button onClick={() => { setIsPlaying(!isPlaying) }}>
+          <button onClick={() => { PlayPause(); }}>
             {(isPlaying) ?
               (<PauseCircleOutlineOutlined style={{ fontSize: 40 }} />) :
               (<PlayCircleOutline style={{ fontSize: 40 }} />)
@@ -74,9 +77,16 @@ export const MusicPlayer: React.FC = () => {
         </PlayerButtonsContainer>
 
         <PlayerTimelineContainer>
-          <div>0:00</div>
-          <Slider defaultValue={60} min={0} max={120} className="MusicTime" />
-          <div>2:00</div>
+          <div>{music.currentTime.toFixed()}</div>
+          <Slider
+            id="MusicSlider"
+            min={0}
+            max={music.duration}
+            step={1}
+            value={music.currentTime}
+            onChangeCommitted={(e, value) => { music.currentTime = value }}
+            className="MusicTime" />
+          <div>{music.duration.toFixed()}</div>
         </PlayerTimelineContainer>
 
       </PlayerControls>
@@ -98,7 +108,8 @@ export const MusicPlayer: React.FC = () => {
           <Slider
             id="VolumeSlider"
             className="MusicVolume"
-            onChange={(e, value) => { }}
+            value={music.volume}
+            onChange={(e, value) => { music.volume = value }}
             min={0}
             max={1}
             step={0.05}
@@ -109,3 +120,5 @@ export const MusicPlayer: React.FC = () => {
     </Container>
   );
 }
+
+export default MusicPlayer;

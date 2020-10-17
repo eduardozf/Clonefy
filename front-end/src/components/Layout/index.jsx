@@ -4,15 +4,18 @@ import { Grid } from './styles';
 import NavBar from '../NavBar';
 import TopBar from '../TopBar';
 import Content from '../Content';
+import MusicPlayer from '../MusicPlayer';
+import PlayerProvider from '../../context/Player';
 
-const Layout: React.FC = () => {
+export default function Layout() {
   return (
     <Grid>
       <NavBar />
       <TopBar />
-      <Content />
+      <PlayerProvider>
+        <Content />
+        <MusicPlayer />
+      </PlayerProvider>
     </Grid>
   );
 }
-
-export default Layout;
