@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
 import { Container, HighlightsContainer, HighlightsGrid } from './styles';
-import Highlight from '../Highlights';
+import Highlight, { Ihighlights } from '../Highlights';
+import { MusicPlayer } from '../MusicPlayer';
+import { playerContext } from '../MusicPlayer/playerContext';
 
 import api from '../../services/Api';
-export interface Ihighlights {
-  id: string;
-  title: string;
-  playlists: string[];
-}
+
 const Content: React.FC = () => {
   const [highlights, setHighlights] = useState<Ihighlights[]>([]);
 
@@ -18,18 +16,20 @@ const Content: React.FC = () => {
     })
   }, [])
 
-
   return (
-    <Container>
-      <HighlightsContainer>
-        <HighlightsGrid>
-          {highlights.map((highlightItem) => (
-            < Highlight key={highlightItem.id} highlightRef={highlightItem} />
-          ))
-          }
-        </HighlightsGrid>
-      </HighlightsContainer>
-    </Container>
+    <>
+      <Container>
+        <HighlightsContainer>
+          <HighlightsGrid>
+            {highlights.map((highlightItem) => (
+              < Highlight key={highlightItem.id} highlightRef={highlightItem} />
+            ))
+            }
+          </HighlightsGrid>
+        </HighlightsContainer>
+      </Container>
+      <MusicPlayer />
+    </>
   );
 }
 

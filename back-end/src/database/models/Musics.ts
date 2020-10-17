@@ -18,6 +18,9 @@ export default class Musics {
   genre: string;
 
   @Column()
+  path: string;
+
+  @Column()
   views: number;
 
   @Column('time with time zone')

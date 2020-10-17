@@ -4,7 +4,11 @@ import api from '../../services/Api';
 import { Container, Category, PlaylistContainer } from './styles';
 import PlaylistCard from '../PlaylistCard';
 
-import { Ihighlights } from '../Content';
+export interface Ihighlights {
+  id: string;
+  title: string;
+  playlists: string[];
+}
 interface Props {
   highlightRef: Ihighlights;
 }

@@ -16,12 +16,13 @@ routes.put('/users/:id/edit', UserController.edit);
 routes.delete('/users/:id/delete', UserController.delete);
 // Musics
 routes.get('/musics', MusicController.list);
+routes.get('/musics/:id', MusicController.getMusicFile);
 routes.post('/musics', MusicController.add);
 routes.put('/musics/:id/edit', MusicController.edit);
 routes.delete('/musics/:id/delete', MusicController.delete);
 // Playlists
 routes.get('/playlists', PlaylistController.list);
-routes.get('/playlists/list', PlaylistController.findByBody);
+routes.get('/playlists/list', PlaylistController.findByQuery);
 routes.get('/playlists/:id/list', PlaylistController.findById);
 routes.post('/playlists', PlaylistController.add);
 // Albums

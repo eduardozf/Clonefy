@@ -1,18 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
+import { baseURL } from '../../services/Api';
 
-
+import { PlayArrow } from '@material-ui/icons';
 import { Background, Container, InfoContainer, PlayButtonContainer, PlayButton } from './styles';
-
-function handleShowPlaylist() {
-  alert("Opening Playlist!");
-}
-
-function handlePlay(e: any) {
-  e.stopPropagation();
-  alert("Playng Music!");
-  return;
-}
-
+import { playerContext, controllerContext } from '../MusicPlayer/playerContext';
 interface IPlaylist {
   id: string;
   name: string;
@@ -26,7 +17,17 @@ interface Props {
   playlist: IPlaylist;
 }
 
+function handleShowPlaylist() {
+  alert("Opening Playlist!");
+}
+
+function handlePlay(e: any) {
+  e.stopPropagation();
+}
+
+
 const PlaylistCard: React.FC<Props> = ({ playlist }) => {
+  const { isPlaying, setIsPlaying } = useContext<any>(playerContext);
 
   return (
     <Background onClick={handleShowPlaylist}>
@@ -43,10 +44,8 @@ const PlaylistCard: React.FC<Props> = ({ playlist }) => {
         </InfoContainer>
       </Container>
       <PlayButtonContainer className="playBTN">
-        <PlayButton onClick={handlePlay}>
-          <svg height="16" role="img" width="16" viewBox="0 0 24 24" aria-hidden="true">
-            <polygon points="21.57 12 5.98 3 5.98 21 21.57 12" fill="currentColor"></polygon>
-          </svg>
+        <PlayButton onClick={(e) => { handlePlay(e); setIsPlaying(!isPlaying) }}>
+          <PlayArrow />
         </PlayButton>
       </PlayButtonContainer>
     </Background>

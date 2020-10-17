@@ -14,8 +14,8 @@ export default class Playlists {
   @Column()
   avatar: string;
 
-  @Column()
-  musics: string;
+  @Column({ type: "simple-array", default: '' })
+  musics: string[];
 
   @Column()
   genre: string;

@@ -30,7 +30,7 @@ export default module.exports = {
     }
   },
 
-  async findByBody(req: Request, res: Response) {
+  async findByQuery(req: Request, res: Response) {
     const repo = getRepository(Playlists);
     try {
       const playlists = await repo.createQueryBuilder("playlists")

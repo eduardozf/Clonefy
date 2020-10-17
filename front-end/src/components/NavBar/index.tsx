@@ -1,8 +1,7 @@
 import React from "react";
 
 import { Container, PrivacyContainer, Logo, ListContainer } from "./styles";
-import NavButton from "../NavButton";
-import { Icons } from '../NavButton';
+import NavButton, { Icons } from "../NavButton";
 
 const NavBar: React.FC = () => {
   return (
