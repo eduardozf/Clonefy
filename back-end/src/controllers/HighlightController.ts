@@ -7,20 +7,20 @@ export default module.exports = {
     try {
       const repo = getRepository(Highlights);
       return res.json(await repo.find());
-    }
-    catch (err) {
-      console.log('⛔ err.message >> ', err.message)
+    } catch (err) {
+      console.log('⛔ err.message >> ', err.message);
+      return res.status(400).json();
     }
   },
 
   async add(req: Request, res: Response) {
     try {
       const repo = getRepository(Highlights);
-      const response = await repo.save(req.body)
+      const response = await repo.save(req.body);
       return res.json(response);
-    }
-    catch (err) {
-      console.log('⛔ err.message >> ', err.message)
+    } catch (err) {
+      console.log('⛔ err.message >> ', err.message);
+      return res.status(400).json();
     }
   },
 };

@@ -1,14 +1,13 @@
 import { Request, Response } from 'express';
-import Musics from '../database/models/Musics';
 import { getRepository } from 'typeorm';
+import Musics from '../database/models/Musics';
 
 export default module.exports = {
   async list(req: Request, res: Response) {
     try {
       const repo = getRepository(Musics);
       return res.json(await repo.find());
-    }
-    catch (err) {
+    } catch (err) {
       console.log('⛔ err.message >> ', err.message);
       return res.status(400).json();
     }
@@ -19,12 +18,35 @@ export default module.exports = {
       const repo = getRepository(Musics);
       const music: any = await repo.findOne({
         where: {
-          id: req.params.id
-        }
-      })
-      return res.sendFile(`D:/Programacao/GoStack11/clonefy/back-end${music.path}`);
+          id: req.params.id,
+        },
+      });
+      return res.sendFile(
+        `D:/Programacao/GoStack11/clonefy/back-end${music.path}`,
+      );
+    } catch (err) {
+      console.log('⛔ err.message >> ', err.message);
+      return res.status(400).json();
     }
-    catch (err) {
+  },
+
+  async Info(req: Request, res: Response) {
+    try {
+      const repo = getRepository(Musics);
+      const music: any = await repo.findOne({
+        where: {
+          id: req.params.id,
+        },
+      });
+      return res.json({
+        id: music.id,
+        name: music.name,
+        avatar: music.avatar,
+        artist: music.artist,
+        genre: music.genre,
+        views: music.views,
+      });
+    } catch (err) {
       console.log('⛔ err.message >> ', err.message);
       return res.status(400).json();
     }
@@ -35,8 +57,7 @@ export default module.exports = {
       const repo = getRepository(Musics);
       const response = await repo.save(req.body);
       return res.json(response);
-    }
-    catch (err) {
+    } catch (err) {
       console.log('⛔ err.message >> ', err.message);
       return res.status(400).json();
     }

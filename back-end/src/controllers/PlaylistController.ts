@@ -7,8 +7,7 @@ export default module.exports = {
     try {
       const repo = getRepository(Playlists);
       return res.json(await repo.find());
-    }
-    catch (err) {
+    } catch (err) {
       console.log('⛔ err.message >> ', err.message);
       return res.status(400).json();
     }
@@ -19,12 +18,11 @@ export default module.exports = {
       const repo = getRepository(Playlists);
       const playlist = await repo.find({
         where: {
-          id: req.params.id
-        }
-      })
+          id: req.params.id,
+        },
+      });
       return res.json(playlist);
-    }
-    catch (err) {
+    } catch (err) {
       console.log('⛔ err.message >> ', err.message);
       return res.status(400).json();
     }
@@ -33,12 +31,12 @@ export default module.exports = {
   async findByQuery(req: Request, res: Response) {
     const repo = getRepository(Playlists);
     try {
-      const playlists = await repo.createQueryBuilder("playlists")
-        .where("id IN (:...ids)", { ids: req.query.playlists })
+      const playlists = await repo
+        .createQueryBuilder('playlists')
+        .where('id IN (:...ids)', { ids: req.query.playlists })
         .getMany();
       return res.json(playlists);
-    }
-    catch (err) {
+    } catch (err) {
       console.log('⛔ err.message >> ', err.message);
       return res.status(400).json();
     }
@@ -47,10 +45,9 @@ export default module.exports = {
   async add(req: Request, res: Response) {
     try {
       const repo = getRepository(Playlists);
-      const response = await repo.save(req.body)
+      const response = await repo.save(req.body);
       return res.json(response);
-    }
-    catch (err) {
+    } catch (err) {
       console.log('⛔ err.message >> ', err.message);
       return res.status(400).json();
     }

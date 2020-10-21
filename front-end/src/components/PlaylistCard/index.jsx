@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
-import { baseURL } from '../../services/Api';
 import { playerContext } from '../../context/Player';
 
 import { PlayArrow } from '@material-ui/icons';
 import { Background, Container, InfoContainer, PlayButtonContainer, PlayButton } from './styles';
 
 function PlaylistCard({ playlist }) {
-  const { PlayPause } = useContext(playerContext);
+  const { AddPlaylistMusics } = useContext(playerContext);
 
   return (
     <Background onClick={() => { }}>
@@ -23,7 +22,7 @@ function PlaylistCard({ playlist }) {
         </InfoContainer>
       </Container>
       <PlayButtonContainer className="playBTN">
-        <PlayButton onClick={(e) => { e.stopPropagation(); PlayPause() }}>
+        <PlayButton onClick={(e) => { e.stopPropagation(); AddPlaylistMusics(playlist.musics) }}>
           <PlayArrow />
         </PlayButton>
       </PlayButtonContainer>

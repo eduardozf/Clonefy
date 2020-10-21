@@ -3,25 +3,24 @@ import { getRepository } from 'typeorm';
 import Users from '../database/models/Users';
 
 export default module.exports = {
-
   async list(req: Request, res: Response) {
     try {
       const repo = getRepository(Users);
       return res.json(await repo.find());
-    }
-    catch (err) {
-      console.log('⛔ err.message >> ', err.message)
+    } catch (err) {
+      console.log('⛔ err.message >> ', err.message);
+      return res.status(400).json();
     }
   },
 
   async add(req: Request, res: Response) {
     try {
       const repo = getRepository(Users);
-      const response = await repo.save(req.body)
+      const response = await repo.save(req.body);
       return res.json(response);
-    }
-    catch (err) {
-      console.log('⛔ err.message >> ', err.message)
+    } catch (err) {
+      console.log('⛔ err.message >> ', err.message);
+      return res.status(400).json();
     }
   },
 

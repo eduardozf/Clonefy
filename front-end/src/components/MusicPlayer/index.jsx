@@ -4,15 +4,12 @@ import { playerContext } from '../../context/Player';
 import { Slider } from '@material-ui/core';
 import {
   Shuffle,
-  PlayCircleOutline,
-  PauseCircleOutlineOutlined,
-  SkipNext,
-  SkipPrevious,
-  Repeat,
+  PlayCircleOutline, PauseCircleOutlineOutlined,
+  SkipNext, SkipPrevious,
+  Repeat, RepeatOne,
   FavoriteBorder,
   QueueMusic,
-  MicNone,
-  ImportantDevices,
+  MicNone, ImportantDevices,
   VolumeDown
 } from '@material-ui/icons';
 import {
@@ -32,19 +29,37 @@ import {
 function MusicPlayer() {
   const {
     music,
-    isPlaying,
-    PlayPause
+    TogglePlay,
+    loopMode, RepeatMode, ShuffleMode,
+    musicIndex, musicsQueue,
+    PreviousMusic, NextMusic,
   } = useContext(playerContext);
 
   return (
     <Container>
       <MusicInfo>
         <div>
-          <img src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png" alt="" width="56px" height="56px" />
+          {
+            (musicsQueue[0] == null) ?
+              <img src='https://i.imgur.com/k879l8i.png' alt="" width="56px" height="56px" /> :
+              <img src={musicsQueue[musicIndex].avatar} alt="" width="56px" height="56px" />
+          }
         </div>
         <MusicNAContainer>
-          <MusicName href="">Musicas curtidas</MusicName>
-          <MusicAuthor href="">Clonefy</MusicAuthor>
+          <MusicName href="/">
+            {
+              (musicsQueue[0] == null) ?
+                'Music name' :
+                musicsQueue[musicIndex].name
+            }
+          </MusicName>
+          <MusicAuthor href="/">
+            {
+              (musicsQueue[0] == null) ?
+                'Artist name' :
+                musicsQueue[musicIndex].artist
+            }
+          </MusicAuthor>
         </MusicNAContainer>
         <LikeMusicContainer>
           <button onClick={() => { }}>
@@ -55,24 +70,30 @@ function MusicPlayer() {
 
       <PlayerControls>
         <PlayerButtonsContainer>
-          <button>
+          <button onClick={() => { ShuffleMode() }}>
             <Shuffle style={{ fontSize: 20 }} />
           </button>
-          <button>
+          <button onClick={() => { PreviousMusic(); }}>
             <SkipPrevious style={{ fontSize: 20 }} />
           </button>
-          <button onClick={() => { PlayPause(); }}>
-            {(isPlaying) ?
-              (<PauseCircleOutlineOutlined style={{ fontSize: 40 }} />) :
-              (<PlayCircleOutline style={{ fontSize: 40 }} />)
+          <button onClick={() => { TogglePlay(); }}>
+            {(music.paused) ?
+              (<PlayCircleOutline style={{ fontSize: 40 }} />) :
+              (<PauseCircleOutlineOutlined style={{ fontSize: 40 }} />)
+            }
+          </button>
+          <button>
+            <SkipNext onClick={() => { NextMusic() }} style={{ fontSize: 20 }} />
+          </button>
+          <button onClick={() => { RepeatMode() }}>
+            {
+              {
+                0: <Repeat />,
+                1: <Repeat style={{ color: '#60bf79' }} />,
+                2: <RepeatOne style={{ color: '#60bf79' }} />
+              }[loopMode]
             }
 
-          </button>
-          <button>
-            <SkipNext style={{ fontSize: 20 }} />
-          </button>
-          <button>
-            <Repeat style={{ fontSize: 20 }} />
           </button>
         </PlayerButtonsContainer>
 
@@ -102,7 +123,7 @@ function MusicPlayer() {
           <ImportantDevices style={{ fontSize: 18 }} />
         </a>
         <VolumeContainer>
-          <a onClick={() => { }}>
+          <a onClick={() => { music.volume = 0 }}>
             <VolumeDown style={{ fontSize: 18 }} />
           </a>
           <Slider
