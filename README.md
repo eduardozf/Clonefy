@@ -1,2 +1,1 @@
-# Clonefy
-<video src="/readme/video.mp4" />
+<img src="/readme/exemple.gif" width="100%" />
