@@ -1,1 +1,1 @@
-<img src="/readme/exemple.gif" width="100%" />
+[![Watch the video](/readme/exemple.gif)](https://youtu.be/GhByf9seljY)
