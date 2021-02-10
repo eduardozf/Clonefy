@@ -1,0 +1,83 @@
+#App{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #aaa;
+  flex-direction: column;
+
+  height: 100vh;
+  width: 100vw;
+}
+#container{
+  display: flex;
+  flex-direction: column;
+
+  max-width: 450px;
+
+  background-color: #eee;
+  border-radius: 20px;
+  padding: 35px;
+}
+
+#container Button{
+  margin: 10px;
+}
+
+.extra-options{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+
+.options{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-music-container{
+  display: flex;
+  flex: 1;
+  margin: 5px 0 5px 0;
+}
+
+.timeContainer{
+  display: flex;
+  flex-direction: row;
+
+  justify-content: center;
+}
+
+.timeContainer div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 50px;
+}
+
+.music-info{
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+}
+
+.music-info img{
+  width: 80px;
+  height: 80px;
+  border-radius: 5%;
+}
+
+.music-info div{
+  display: flex;
+  flex-direction: column;
+
+  padding-left: 10px;
+}
+
+.music-info div a{
+  font-size: 12px;
+  text-decoration: none;
+  color: #777;
+}

@@ -1,10 +1,10 @@
 {
   "type": "postgres",
-  "host": "192.168.15.44",
+  "host": "localhost",
   "port": 5432,
   "username": "postgres",
   "password": "docker",
-  "databse": "clonefy",
+  "database": "postgres",
   "migrations": [
     "./src/database/migrations/**/*.ts"
   ],

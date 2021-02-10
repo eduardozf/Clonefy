@@ -1,4 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export default class Playlists {
@@ -14,7 +20,7 @@ export default class Playlists {
   @Column()
   avatar: string;
 
-  @Column({ type: "simple-array", default: '' })
+  @Column({ type: 'simple-array', default: '' })
   musics: string[];
 
   @Column()
@@ -23,6 +29,9 @@ export default class Playlists {
   @Column()
   private: boolean;
 
-  @Column('time with time zone')
-  date: Date;
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }

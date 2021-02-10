@@ -11,15 +11,11 @@ const routes = Router();
 // Users
 routes.get('/users', UserController.list);
 routes.post('/users', UserController.add);
-routes.put('/users/:id/edit', UserController.edit);
-routes.delete('/users/:id/delete', UserController.delete);
 // Musics
 routes.get('/musics', MusicController.list);
 routes.get('/musics/:id', MusicController.getMusicFile);
 routes.get('/musics/:id/info', MusicController.Info);
 routes.post('/musics', MusicController.add);
-routes.put('/musics/:id/edit', MusicController.edit);
-routes.delete('/musics/:id/delete', MusicController.delete);
 // Playlists
 routes.get('/playlists', PlaylistController.list);
 routes.get('/playlists/list', PlaylistController.findByQuery);
@@ -33,10 +29,3 @@ routes.get('/highlights', HighlightController.list);
 routes.post('/highlights', HighlightController.add);
 
 export default routes;
-
-/* Emojis que funcionam no console (windows)
- *♈⛎♉♊♋♌♍♎♏♐♓♒♑
- *⛔❌⭕❗❕❓❔
- *❎✅⏸⏯⏹⏺⏭⏮⏩⏪⏫⏬
- * ➰➕➖➗⚫⚪⬛⬜
- */

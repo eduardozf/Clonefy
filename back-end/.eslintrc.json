@@ -21,6 +21,9 @@
   "rules": {
     "prettier/prettier": "error",
     "no-default-export": "off",
+    "class-methods-use-this": "off",
+    "camelcase": "off",
+    "no-console": "off",
     "import/extensions": [
       "error",
       "ignorePackages",

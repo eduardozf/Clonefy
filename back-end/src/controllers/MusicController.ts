@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
+import path from 'path';
 import Musics from '../database/models/Musics';
 
 export default module.exports = {
@@ -22,7 +23,7 @@ export default module.exports = {
         },
       });
       return res.sendFile(
-        `D:/Programacao/GoStack11/clonefy/back-end${music.path}`,
+        `${path.resolve(__dirname, '..', '..')}${music.path}`,
       );
     } catch (err) {
       console.log('⛔ err.message >> ', err.message);
@@ -61,30 +62,5 @@ export default module.exports = {
       console.log('⛔ err.message >> ', err.message);
       return res.status(400).json();
     }
-  },
-
-  edit(req: Request, res: Response) {
-    /* const { id } = req.params;
-    const { name, avatar, artist, album, genre } = req.body;
-    const musicIndex = musics.findIndex(music => music.id === id);
-
-    musics[musicIndex] = {
-      id,
-      name,
-      avatar,
-      artist,
-      album,
-      genre,
-      views: musics[musicIndex].views,
-    };
-    res.json(musics[musicIndex]); */
-  },
-
-  delete(req: Request, res: Response) {
-    /* const { id } = req.params;
-    const musicIndex = musics.findIndex(music => music.id === id);
-
-    musics.splice(musicIndex, 1);
-    return res.status(204).json(); */
   },
 };

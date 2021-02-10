@@ -1,8 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export default class Users {
-
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -21,6 +26,9 @@ export default class Users {
   @Column()
   playlists: string;
 
-  @Column('time with time zone')
-  date: Date;
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }
